@@ -1,12 +1,23 @@
 #include <stdio.h>
-#include <string.h> 
- float saldo = 0; 
- int usuario, opcao; 
- int main(){ 
-    printf(" BEM VINDO AO SISTEMA DE CAIXA ELETRONICO FIAP\n"); 
-    printf(" SEU SALDO E DE: R$%.2f ", saldo); 
-    
+#include <string.h>
 
+float saldo = 0;
 
-    return 0; 
+void exibirMenu() {
+    printf("\n========================\n");
+    printf(" CAIXA ELETRONICO \n");
+    printf("========================\n");
+    printf("1 - Consultar Saldo\n");
+    printf("2 - Realizar Saque\n");
+    printf("3 - Realizar Deposito\n");
+    printf("0 - Sair\n");
+    printf("========================\n");
+    printf("Escolha uma opcao: ");
+}
+
+int main() {
+
+    exibirMenu();
+
+    return 0;
 }
