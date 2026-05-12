@@ -17,7 +17,18 @@ void exibirMenu() {
 
 int main() {
 
+    int opcao;
+
     exibirMenu();
+    scanf("%d", &opcao);
+
+    // Limpar buffer
+    while (getchar() != '\n');
+
+    // Validação básica
+    if (opcao < 0 || opcao > 3) {
+        printf("Opcao invalida!\n");
+    }
 
     return 0;
 }
