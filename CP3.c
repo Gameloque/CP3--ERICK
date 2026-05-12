@@ -1,18 +1,53 @@
 #include <stdio.h>
-#include <string.h>
 
 float saldo = 0;
 
+// Prototipos
+void exibirMenu();
+void consultarSaldo(float saldo);
+float realizarSaque(float saldo);
+float realizarDeposito(float saldo);
+
 void exibirMenu() {
-    printf("\n========================\n");
-    printf(" CAIXA ELETRONICO \n");
-    printf("========================\n");
-    printf("1 - Consultar Saldo\n");
-    printf("2 - Realizar Saque\n");
-    printf("3 - Realizar Deposito\n");
-    printf("0 - Sair\n");
-    printf("========================\n");
-    printf("Escolha uma opcao: ");
+    printf("\n1 - Consultar Saldo");
+    printf("\n2 - Realizar Saque");
+    printf("\n3 - Realizar Deposito");
+    printf("\n0 - Sair");
+    printf("\nOpcao: ");
+}
+
+void consultarSaldo(float saldo) {
+    printf("\nSaldo: %.2f\n", saldo);
+}
+
+float realizarSaque(float saldo) {
+    float valor;
+
+    printf("Valor do saque: ");
+    scanf("%f", &valor);
+
+    if (valor > 0 && valor <= saldo) {
+        saldo -= valor;
+        printf("Saque realizado!\n");
+    } else {
+        printf("Valor invalido!\n");
+    }
+    return saldo;
+}
+float realizarDeposito(float saldo) {
+    float valor;
+
+    printf("Valor do deposito: ");
+    scanf("%f", &valor);
+
+    if (valor > 0) {
+        saldo += valor;
+        printf("Deposito realizado!\n");
+    } else {
+        printf("Valor invalido!\n");
+    }
+
+    return saldo;
 }
 
 int main() {
@@ -22,26 +57,27 @@ int main() {
     exibirMenu();
     scanf("%d", &opcao);
 
-    // Limpar buffer
-    while (getchar() != '\n');
-
-    // Validação básica
-    if (opcao < 0 || opcao > 3) {
-        printf("Opcao invalida!\n");
-    }
-
     switch(opcao) {
+
         case 1:
             consultarSaldo(saldo);
             break;
+
         case 2:
-            saldo = realizarSaque(saldo);
+            realizarSaque(saldo);
             break;
-        case 0: printf("Saindo...\n");
+
+        case 3:
+            realizarDeposito(saldo);
+            break;
+
+        case 0:
+            printf("Saindo...\n");
             break;
 
         default:
-            printf("Opcao Invalida!\n"); }
+            printf("Opcao invalida!\n");
+    }
 
     return 0;
-}
+} 
