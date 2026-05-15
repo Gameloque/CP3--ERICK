@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 float saldo = 0;
 
@@ -78,6 +79,14 @@ int main() {
         default:
             printf("Opcao invalida!\n");
     }
+
+    system("pause");
+    system("cls");
+
+    printf("Saldo Atual: R$ %.2f\n", saldo);
+    printf("\nPressione Enter para continuar...");
+    setbuf(stdin, NULL);
+    getchar();
 
     return 0;
 } 
