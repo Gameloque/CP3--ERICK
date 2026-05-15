@@ -9,7 +9,6 @@ void consultarSaldo(float saldo);
 float realizarSaque(float saldo);
 float realizarDeposito(float saldo);
 
-
 void exibirMenu() {
     printf("\n1 - Consultar Saldo");
     printf("\n2 - Realizar Saque");
@@ -18,7 +17,9 @@ void exibirMenu() {
     printf("\nOpcao: ");
 }
 
-
+void consultarSaldo(float saldo) {
+    printf("\nSaldo: %.2f\n", saldo);
+}
 
 float realizarSaque(float saldo) {
     float valor;
@@ -33,7 +34,6 @@ float realizarSaque(float saldo) {
         printf("Valor invalido!\n");
     }
     return saldo;
-
 }
 float realizarDeposito(float saldo) {
     float valor;
@@ -79,16 +79,14 @@ int main() {
         default:
             printf("Opcao invalida!\n");
     }
-    
+
     system("pause");
     system("cls");
 
-    printf("Saldo: R$ %.2f\n", saldo);
+    printf("Saldo Atual: R$ %.2f\n", saldo);
     printf("\nPressione Enter para continuar...");
     setbuf(stdin, NULL);
     getchar();
 
     return 0;
 } 
-
-
