@@ -29,11 +29,11 @@ int main() {
             break;
 
         case 2:
-            realizarSaque(saldo);
+            saldo = realizarSaque(saldo);
             break;
 
         case 3:
-            realizarDeposito(saldo);
+            saldo = realizarDeposito(saldo);
             break;
 
         case 0:
@@ -70,12 +70,12 @@ void exibirMenu() {
     printf("Digite sua opcao: ");
 }
 // Função para consultar o saldo atual
-void consultarSaldo(float saldoAtual) {
+void consultarSaldo(float saldo) {
     printf("\n");
     printf("===================\n");
     printf(" SALDO ATUAL \n");
     printf("===================\n");
-    printf("R$ %.2f\n", saldoAtual);
+    printf("R$ %.2f\n", saldo);
     printf("===================\n");
 }
 
@@ -88,6 +88,7 @@ float realizarSaque(float saldoAtual) {
     printf("Saldo atual: R$ %.2f\n", saldoAtual);
     printf("Valor do saque: ");
     scanf("%f", &valorSaque);
+    limparBuffer();
 
     // Validações de seguranca para verificar se o usuário não tente burlar o sistema com valores negativos ou exceder um máximo de 1000 reais
     if (valorSaque <= 0) {
@@ -120,6 +121,7 @@ float realizarDeposito(float saldoAtual) {
     printf("Saldo atual: R$ %.2f\n", saldoAtual);
     printf("\nDigite o valor do deposito: R$ ");
     scanf("%f", &valorDeposito);
+    limparBuffer();
 
         // Validação do deposito --- Ou seja, Verifica se o depósito é válido ou não
 
@@ -128,6 +130,10 @@ float realizarDeposito(float saldoAtual) {
         printf(" Valor de deposito invalido, por favor, tente novamente!\n");
         return saldoAtual;
     } 
+    if (valorDeposito > 67000.00) {
+        printf("Valor excede o limite de deposito disponivel no dia! Maximo de R$67.000,00\n");
+        return saldoAtual;
+    }
     saldoAtual += valorDeposito;
     printf("Deposito de R$ %.2f realizado com sucesso!\n", valorDeposito);
     printf("Novo saldo: R$ %.2f\n", saldoAtual);
