@@ -1,0 +1,77 @@
+Sprint 01
+
+Curso: Ciências da Computação – 1º Ano
+Turma:1CCA
+Equipe: equipe1 
+Integrantes: Fernando Bonfim, Anna Cecilia, Arthur Osay, Guilherme Henrique e Caio Marques
+Desafio: Sistema Inteligente de Controle de Energia Residencial
+
+Objetivo da Sprint
+Nesta sprint foi desenvolvido um circuito lógico representando um sistema automático de controle de energia residencial. O sistema decide quando ligar automaticamente uma lâmpada com base em sensores de presença e luminosidade.
+
+
+1. Circuito Lógico Representativo
+O sistema deverá ligar a luz automaticamente apenas quando:
+houver presença de uma pessoa no ambiente;
+o ambiente estiver escuro.
+
+Variáveis de Entrada
+| Variável | Significado                |
+| -------- | -------------------------- |
+| P        | Sensor de presença         |
+| L        | Sensor de luminosidade     |
+| S        | Saída do sistema (lâmpada) |
+
+Convenções
+`1` = verdadeiro / ativo
+`0` = falso / inativo
+
+Funcionamento da lógica
+`P = 1` → há presença
+`L = 1` → ambiente escuro
+`S = 1` → lâmpada ligada
+
+A lâmpada só será ligada quando as duas condições forem verdadeiras simultaneamente.
+
+Representação do Circuito
+Circuito utilizando uma porta lógica AND:
+
+```text
+ P ----\
+        AND ---- S
+ L ----/
+```
+
+2. Expressão Lógica
+A expressão booleana do circuito é:
+
+S = P X L
+
+`X` representa a operação lógica AND
+a saída só será verdadeira quando ambas as entradas forem verdadeiras
+
+3. Tabela Verdade
+| P | L | S |
+| - | - | - |
+| 0 | 0 | 0 |
+| 0 | 1 | 0 |
+| 1 | 0 | 0 |
+| 1 | 1 | 1 |
+
+Explicação da Tabela Verdade
+
+Caso 1 — `P = 0` e `L = 0`
+Não existe presença e o ambiente não está escuro.
+Resultado: a lâmpada permanece desligada.
+
+Caso 2 — `P = 0` e `L = 1`
+O ambiente está escuro, porém não há ninguém presente.
+Resultado: a lâmpada permanece desligada.
+
+Caso 3 — `P = 1` e `L = 0`
+Há presença, mas o ambiente já está iluminado.
+Resultado: a lâmpada permanece desligada.
+
+Caso 4 — `P = 1` e `L = 1`
+Há presença e o ambiente está escuro.
+Resultado: a lâmpada é ligada automaticamente.
