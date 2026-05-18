@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h> // Usado para dar o ("cls") e ("pause") -- Não estudamos ainda, mas quis implementar para o melhor funcionamento do sistema
 
-float saldo = 0;
-
 // Funções usadas no texto
 void exibirMenu();
 void consultarSaldo(float saldo);
@@ -11,12 +9,12 @@ float realizarDeposito(float saldo);
 void limparBuffer();
 
 int main() {
-
+    float saldo = 0; // Saldo inicial, como se não tivsse nada no começo da operação do caixa
+    int opcao;
     printf("Bem-vindo ao CAIXA ELETRONICO FIAP!\n");
     printf("Saldo inicial: R$ %.2f\n\n", saldo);
 
     // Esse é o loop principal para manter o sistema ativo
-    int opcao;
     do {
         system("cls || clear");  // Limpar a tela
         exibirMenu();
@@ -45,10 +43,9 @@ int main() {
 
         default:
             printf("Opcao invalida! Escolha entre 0 e 3.\n");
+            system("pausa || ler -p 'Pressione Enter...'");
     }
     
-    system("pause");
-    system("cls");
 
     if(opcao != 0) {
     printf("\nPressione Enter para continuar...");
@@ -73,18 +70,19 @@ void exibirMenu() {
     printf("Digite sua opcao: ");
 }
 // Função para consultar o saldo atual
-void consultarSaldo(float saldo) {
+void consultarSaldo(float saldoAtual) {
     printf("\n");
     printf("===================\n");
     printf(" SALDO ATUAL \n");
     printf("===================\n");
-    printf("R$ %.2f\n", saldo);
+    printf("R$ %.2f\n", saldoAtual);
     printf("===================\n");
 }
 
 // Função para realizar o saque
 float realizarSaque(float saldoAtual) {
     float valorSaque;
+    printf("--------\n");
     printf("\n SAQUE\n");
     printf("--------\n");
     printf("Saldo atual: R$ %.2f\n", saldoAtual);
@@ -92,44 +90,51 @@ float realizarSaque(float saldoAtual) {
     scanf("%f", &valorSaque);
 
     // Validações de seguranca para verificar se o usuário não tente burlar o sistema com valores negativos ou exceder um máximo de 1000 reais
-    if (valorSaque > 0 && valorSaque <= saldoAtual) {
-        saldo -= valorSaque;
-        printf("Saque realizado!\n");
-    } else if (valorSaque > 2000.00) {
+    if (valorSaque <= 0) {
+        printf("\nO saque não foi realizado!\n");
+        return saldoAtual;
+    } 
+    if (valorSaque > 2000.00) {
         printf("Valor excede o limite de saque disponível no dia! Maximo de R$1.500,00\n");
-    } else {
-        printf("Valor invalido!\n");
+        return saldoAtual;
+    } 
+    if (valorSaque > saldoAtual) {
+        printf("\nSaldo insuficiente para realizar o saque!\n");
+        return saldoAtual;
     }
     // Saque autorizado -- Aqui Printa se o saque for 100% autorizado
 
     saldoAtual -= valorSaque;
-    printf(" Saque de R$ %.2f realizado com sucesso!\n", valorSaque);
+    printf("Saque de R$ %.2f realizado com sucesso!\n", valorSaque);
     printf("Novo saldo: R$ %.2f\n", saldoAtual);
-return saldoAtual;
+
+    return saldoAtual;
 
 }
 float realizarDeposito(float saldoAtual) {
     float valorDeposito;
 
+    printf("-----------\n");
     printf("\n DEPOSITO\n");
     printf("-----------\n");
     printf("Saldo atual: R$ %.2f\n", saldoAtual);
-    printf("Digite o valor do deposito: R$ ");
+    printf("\nDigite o valor do deposito: R$ ");
     scanf("%f", &valorDeposito);
 
         // Validação do deposito --- Ou seja, Verifica se o depósito é válido ou não
 
-    if (valorDeposito > 0) {
+    if (valorDeposito <= 0) {
         saldoAtual += valorDeposito;
-        printf("Seu deposito de %.2f reais foi realizado com sucesso!\n", valorDeposito);
-        printf("Novo saldo: R$ %.2f\n", saldoAtual);
-    } else {
-        printf("Valor invalido!\n");
+        printf(" Valor de deposito invalido, por favor, tente novamente!\n");
         return saldoAtual;
+    } 
+    saldoAtual += valorDeposito;
+    printf("Deposito de R$ %.2f realizado com sucesso!\n", valorDeposito);
+    printf("Novo saldo: R$ %.2f\n", saldoAtual);
+    
+    return saldoAtual;
     }
 
-return saldoAtual;
-}
 
 //Função para limpar o buffer do teclado, evitando erros de leitura
 void limparBuffer() {
