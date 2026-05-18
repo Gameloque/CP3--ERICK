@@ -1,21 +1,27 @@
 #include <stdio.h>
-#include <stdlib.h>
+#include <stdlib.h> // Usado para dar o ("cls") e ("pause") -- Não estudamos ainda, mas quis implementar para o melhor funcionamento do sistema
 
 float saldo = 0;
 
-// Prototipos
+// Funções usadas no texto
 void exibirMenu();
 void consultarSaldo(float saldo);
 float realizarSaque(float saldo);
 float realizarDeposito(float saldo);
+void limparBuffer();
 
-
+// Função para exibir o menu principal -- Funciona igual arduíno? kkk
 void exibirMenu() {
+    printf("\n");
+    printf("============================\n");
+    printf("  CAIXA ELETRONICO FIAP  \n");
+    printf("============================\n");
     printf("\n1 - Consultar Saldo");
     printf("\n2 - Realizar Saque");
     printf("\n3 - Realizar Deposito");
     printf("\n0 - Sair");
-    printf("\nOpcao: ");
+    printf("============================\n");
+    printf("Digite sua opcao: ");
 }
 
 
